@@ -26,8 +26,6 @@ body, html {
 }
 
 section {
-    max-width: 1080px;
-    margin: 4rem auto;
     padding: 2rem;
 }
 
@@ -67,24 +65,49 @@ a:hover {
     background-color: var(--cor-lilas-forte);
 }
 
-/* HERO / Destaque */
 #Destaque {
-    text-align: center;
-    background-image: url('img/bk/header.jpg'); /* Substitua pela imagem de destaque */
+    position: relative;
+    display: flex; /* Usar Flexbox para alinhar */
+    align-items: center; /* Alinha verticalmente */
+    justify-content: center; /* Alinha horizontalmente */
+    flex-direction: column; /* Para empilhar os textos em coluna */
+    background-image: url('img/bk/header.svg');
     background-size: cover;
-    background-position: center;
+    background-position: center center; /* Melhor ajuste de foco */
     color: #fff;
-    padding: 6rem 2rem;
-    border-radius: 16px;
+    padding: 2rem;
+    height: 100vh;
+    overflow: hidden;
+    text-align: justify; /* Ainda mantém o texto centralizado */
 }
+
 #Destaque h1, #Destaque h2 {
     color: white;
-    text-shadow: 0 2px 4px rgba(0,0,0,0.2);
+    text-shadow: 0 2px 4px rgba(0, 0, 0, 0.8);
+    margin: 0.5rem 0;
+    width: 60%;
+}
+
+#Problema {
+    background-image: url('img/bk/2.svg');
+    background-size: cover;
+    background-position: top center; /* Melhor ajuste de foco */
+    height: 50vh;
+}
+
+#Problema > .retangulo{
+    background-color: #ffffff;
+    width: max-content;
+    padding: 10px;
+    border-radius: 10px;
+    box-shadow: 0 2px 3px rgba(0, 0, 0, 0.1);
 }
 
 /* Estilo geral da seção Benefícios */
 #Beneficios {
-    background: linear-gradient(135deg, #f2dada 0%, #d5a3d7 100%);
+    background-image: url('img/bk/3.svg');
+    background-size: cover;
+    background-position: bottom center; /* Melhor ajuste de foco */
     padding: 4rem 2rem;
     border-radius: 20px;
     text-align: center;
@@ -164,7 +187,6 @@ a:hover {
 /* Prova Social */
 #ProvaSocial {
     padding: 2rem;
-    background-color: #fff;
     border-radius: 16px;
     text-align: center;
 }
@@ -242,7 +264,7 @@ a:hover {
 
 /* Estilo geral da seção Oferta */
 #Oferta {
-    background: linear-gradient(145deg, #F2DAD8, #E3B8D7);
+    background: linear-gradient(145deg, var(--cor-bk), var(--cor-lilas));
     padding: 6rem 2rem;
     text-align: center;
     border-radius: 30px;
@@ -416,7 +438,9 @@ a:hover {
 
 /* Estilo geral da seção FAQ */
 #FAQ {
-    background-color: #ffffff;
+    background-image: url('img/bk/4.svg');
+    background-size: cover;
+    background-position: top center; /* Melhor ajuste de foco */
     padding: 6rem 2rem;
     text-align: center;
     border-radius: 30px;
@@ -433,11 +457,12 @@ a:hover {
 }
 
 #FAQ p {
-    font-size: 1.2rem;
+    font-size: 16px;
     color: var(--cor-primaria);
     opacity: 0.8;
     margin-bottom: 3rem;
     font-weight: 400;
+    text-align: justify;
 }
 
 /* Contêiner de perguntas */
@@ -471,14 +496,14 @@ a:hover {
 }
 
 .faq-item .faq-question h3 {
-    font-size: 1.6rem;
+    font-size: 16px;
     color: var(--cor-rosa);
     font-weight: bold;
     margin: 0;
 }
 
 .faq-item .faq-toggle {
-    font-size: 1.8rem;
+    font-size: 16px;
     font-weight: bold;
     color: var(--cor-primaria);
     transition: transform 0.3s ease-in-out;
@@ -488,7 +513,7 @@ a:hover {
 .faq-item .faq-answer {
     display: none;
     margin-top: 1rem;
-    font-size: 1.1rem;
+    font-size: 16px;
     color: var(--cor-primaria);
     line-height: 1.6;
     opacity: 0.8;
@@ -510,7 +535,9 @@ a:hover {
 
 /* CTA Final */
 #CTA {
-    background-color: var(--cor-lilas);
+    background-image: url('img/bk/4.svg');
+    background-size: cover;
+    background-position: top center; /* Melhor ajuste de foco */
     padding: 2rem;
     text-align: center;
     color: white;
@@ -518,6 +545,16 @@ a:hover {
 }
 #CTA a {
     margin-top: 1rem;
+}
+
+#CTA > .retangulo{
+    text-align: center;
+    background-color: var(--cor-lilas);
+    padding: 10px;
+    border-radius: 10px;
+    box-shadow: 0 2px 3px rgba(0, 0, 0, 0.1);
+    max-width: 1080px;
+    margin: auto;
 }
 
 /* Footer */
@@ -667,15 +704,15 @@ footer {
     }
 
     .faq-item {
-        padding: 1.2rem;
+        padding: 16px;
     }
 
     .faq-item .faq-question h3 {
-        font-size: 1.4rem;
+        font-size: 16px;
     }
 
     .faq-item .faq-toggle {
-        font-size: 1.6rem;
+        font-size: 16px;
     }
     #Formulario {
         padding: 1.5rem;
