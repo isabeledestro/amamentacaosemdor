@@ -65,17 +65,17 @@
     <script>
         document.getElementById('formulario').addEventListener('submit', function(event) {
             event.preventDefault();
-    
+
             const nome = document.getElementById('nome-completo').value;
             const contato = document.getElementById('contato').value;
             const email = document.getElementById('email').value;
-    
+
             const dados = {
                 "Nome": nome,
-                "Telefone": contato, // ✅ agora a variável está correta
+                "Telefone": contato,
                 "E-mail": email
             };
-    
+
             fetch('https://hook.us2.make.com/wobko2bjxc1wrb9mgiz7yz4du1m4iu5q', {
                 method: 'POST',
                 headers: {
@@ -86,10 +86,11 @@
             .then(response => {
                 if (response.ok) {
                     console.log('Dados enviados com sucesso.');
-                    // só exibe se o elemento existir
                     const mensagemEnvio = document.getElementById('mensagem-envio');
                     if (mensagemEnvio) mensagemEnvio.style.display = 'block';
                     document.getElementById('formulario').reset();
+                    // Redireciona após o envio com sucesso
+                    window.location.href = 'https://mpago.li/2SeR83c';
                 } else {
                     console.error('Erro ao enviar os dados: ', response.statusText);
                 }
