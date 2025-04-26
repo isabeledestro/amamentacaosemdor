@@ -72,7 +72,7 @@
     
             const dados = {
                 "Nome": nome,
-                "Telefone": telefone,
+                "Telefone": contato, // ✅ agora a variável está correta
                 "E-mail": email
             };
     
@@ -86,7 +86,9 @@
             .then(response => {
                 if (response.ok) {
                     console.log('Dados enviados com sucesso.');
-                    document.getElementById('mensagem-envio').style.display = 'block';
+                    // só exibe se o elemento existir
+                    const mensagemEnvio = document.getElementById('mensagem-envio');
+                    if (mensagemEnvio) mensagemEnvio.style.display = 'block';
                     document.getElementById('formulario').reset();
                 } else {
                     console.error('Erro ao enviar os dados: ', response.statusText);
@@ -96,7 +98,7 @@
                 console.error('Erro ao enviar os dados:', error);
             });
         });
-    </script>           
+    </script>        
     <footer>
         <p>&copy; 2025 Amamentação sem Dor | Política de Atendimento | <a href="https://wa.me/5521988729585" target="_blank">Contato via WhatsApp</a></p>
     </footer>           
