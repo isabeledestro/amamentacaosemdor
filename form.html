@@ -62,7 +62,41 @@
             </form>
         </section>            
     </main>
-    <script src="contatos/enviar.js"></script>        
+    <script>
+        document.getElementById('formulario').addEventListener('submit', function(event) {
+            event.preventDefault();
+    
+            const nome = document.getElementById('nome-completo').value;
+            const contato = document.getElementById('contato').value;
+            const email = document.getElementById('email').value;
+    
+            const dados = {
+                nome: nome,
+                contato: contato,
+                email: email
+            };
+    
+            fetch('https://hooks.zapier.com/hooks/catch/22673288/2p4rfix/', {
+                method: 'POST',
+                headers: {
+                    'Content-Type': 'application/json',
+                },
+                body: JSON.stringify(dados)
+            })
+            .then(response => {
+                if (response.ok) {
+                    console.log('Dados enviados com sucesso.');
+                    document.getElementById('mensagem-envio').style.display = 'block';
+                    document.getElementById('formulario').reset();
+                } else {
+                    console.error('Erro ao enviar os dados: ', response.statusText);
+                }
+            })
+            .catch((error) => {
+                console.error('Erro ao enviar os dados:', error);
+            });
+        });
+    </script>           
     <footer>
         <p>&copy; 2025 Amamentação sem Dor | Política de Atendimento | <a href="https://wa.me/5521988729585" target="_blank">Contato via WhatsApp</a></p>
     </footer>           
