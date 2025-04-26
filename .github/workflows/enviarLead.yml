@@ -1,0 +1,40 @@
+name: Enviar Dados para Notion
+
+on:
+  workflow_dispatch:
+    inputs:
+      nome:
+        description: 'Nome completo'
+        required: true
+        type: string
+      telefone:
+        description: 'Número de Contato'
+        required: true
+        type: string
+      email:
+        description: 'E-mail'
+        required: true
+        type: string
+
+jobs:
+  enviarLead:
+    runs-on: ubuntu-latest
+
+    steps:
+      - name: Checar código do repositório
+        uses: actions/checkout@v2
+
+      - name: Enviar para Notion
+        run: |
+          curl -X POST "https://api.notion.com/v1/pages" \
+            -H "Authorization: Bearer ${{ secrets.NOTION_TOKEN }}" \
+            -H "Notion-Version: 2021-05-13" \
+            -H "Content-Type: application/json" \
+            -d '{
+              "parent": { "database_id": "${{ secrets.NOTION_DATABASE_ID }}" },
+              "properties": {
+                "Nome": { "title": [{ "text": { "content": "${{ github.event.inputs.nome }}" } }] },
+                "Telefone": { "rich_text": [{ "text": { "content": "${{ github.event.inputs.telefone }}" } }] },
+                "Email": { "rich_text": [{ "text": { "content": "${{ github.event.inputs.email }}" } }] }
+              }
+            }'

@@ -1,0 +1,106 @@
+<!DOCTYPE html>
+<html lang="pt-br">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Amamente sem dores - Enf. Isabele Destro</title>
+    <link rel="stylesheet" href="style.css">
+    <link rel="icon" type="image/png" href="img/favicon/favicon-96x96.png" sizes="96x96" />
+    <link rel="icon" type="image/svg+xml" href="img/favicon/favicon.svg" />
+    <link rel="shortcut icon" href="img/favicon/favicon.ico" />
+    <link rel="apple-touch-icon" sizes="180x180" href="img/favicon/apple-touch-icon.png" />
+    <meta name="apple-mobile-web-app-title" content="ASD - Enf" />
+    <link rel="manifest" href="img/favicon/site.webmanifest" />
+</head>
+<body>
+    <main>
+        <section id="Formulario">
+            <h1>Preencha seus dados para continuar</h1>
+            <p>Por favor, preencha as informações abaixo para que possamos entrar em contato com você e agendar sua consulta de amamentação.</p>
+            
+            <form id="formulario" class="formulario-container">
+                <div class="input-group">
+                    <label for="nome">Nome Completo</label>
+                    <input type="text" id="nome" name="nome" required placeholder="Digite seu nome completo">
+                </div>
+                
+                <div class="input-group">
+                    <label for="telefone">Número de Contato <span class="form-hint">(com DDD, ex: (21) 98872-9585)</span></label>
+                    <input type="tel" id="telefone" name="telefone" required placeholder="(21) 98872-9585">
+                </div>
+                
+                <div class="input-group">
+                    <label for="email">E-mail</label>
+                    <input type="email" id="email" name="email" required placeholder="Digite seu e-mail">
+                </div>
+                
+                <button type="submit" class="btn-continuar">Continuar</button>
+            </form>
+        
+            <script>
+                // Máscara do telefone
+                function aplicarMascaraTelefone(input) {
+                    input.addEventListener('input', function(e) {
+                        let valor = e.target.value.replace(/\D/g, '');
+                        if (valor.length > 11) valor = valor.slice(0, 11);
+        
+                        let formatado = valor;
+                        if (valor.length > 2 && valor.length <= 6) {
+                            formatado = `(${valor.slice(0,2)}) ${valor.slice(2)}`;
+                        } else if (valor.length > 6 && valor.length <= 10) {
+                            formatado = `(${valor.slice(0,2)}) ${valor.slice(2,6)}-${valor.slice(6)}`;
+                        } else if (valor.length === 11) {
+                            formatado = `(${valor.slice(0,2)}) ${valor.slice(2,7)}-${valor.slice(7)}`;
+                        }
+        
+                        e.target.value = formatado;
+                    });
+                }
+        
+                aplicarMascaraTelefone(document.getElementById('telefone'));
+        
+                // Envio para GitHub Actions (ou outro servidor intermediário)
+                document.getElementById("formulario").addEventListener("submit", async function(e) {
+                    e.preventDefault();
+                    const form = e.target;
+        
+                    const data = {
+                        nome: form.nome.value.trim(),
+                        telefone: form.telefone.value.trim(),
+                        email: form.email.value.trim()
+                    };
+        
+                    try {
+                        const response = await fetch("https://api.github.com/repos/<SEU_USUARIO>/<REPOSITORIO>/dispatches", {
+                            method: "POST",
+                            headers: {
+                                "Accept": "application/vnd.github.v3+json",
+                                "Authorization": "Bearer <SEU_GITHUB_TOKEN>"
+                            },
+                            body: JSON.stringify({
+                                event_type: "enviarLead",
+                                client_payload: data
+                            })
+                        });
+        
+                        const result = await response.json();
+                        if (response.ok) {
+                            alert("Seus dados foram enviados com sucesso! Entraremos em contato em breve.");
+                            form.reset();
+                        } else {
+                            alert("Ocorreu um erro ao enviar seus dados. Tente novamente.");
+                            console.error(result);
+                        }
+                    } catch (error) {
+                        console.error("Erro inesperado:", error);
+                        alert("Erro de conexão. Verifique sua internet e tente novamente.");
+                    }
+                });
+            </script>
+        </section>               
+    </main>    
+    <footer>
+        <p>&copy; 2025 Amamentação sem Dor | Política de Atendimento | <a href="https://wa.me/5521988729585" target="_blank">Contato via WhatsApp</a></p>
+    </footer>           
+</body>
+</html>
