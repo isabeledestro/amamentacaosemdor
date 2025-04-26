@@ -564,6 +564,18 @@ footer {
     padding: 2rem 1rem;
     color: var(--cor-primaria);
 }
+footer > p > a{
+    font-size: 16px;
+    background: none;
+    color: var(--cor-primaria);
+    padding: 0px;
+}
+footer > p > a:hover{
+    font-size: 16px;
+    background: none;
+    color: var(--cor-lilas-forte);
+    padding: 0px;
+}
 
 /* Estilos gerais para a subpágina de formulário */
 #Formulario {
@@ -730,5 +742,17 @@ footer {
     .btn-continuar {
         font-size: 1rem;
         padding: 0.8rem 1.5rem;
+    }
+    footer > p > a{
+        font-size: 16px;
+        background: none;
+        color: var(--cor-primaria);
+        padding: 0px;
+    }
+    footer > p > a:hover{
+        font-size: 16px;
+        background: none;
+        color: var(--cor-lilas-forte);
+        padding: 0px;
     }
 }
