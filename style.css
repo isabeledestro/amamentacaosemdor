@@ -576,11 +576,10 @@ footer > p > a:hover{
     color: var(--cor-lilas-forte);
     padding: 0px;
 }
-
-/* Estilos gerais para a subpágina de formulário */
+/* Estilos gerais para o formulário */
 #Formulario {
     background-color: #fff;
-    max-width: 800px;
+    max-width: 900px;
     margin: auto;
     padding: 2rem;
     border-radius: 15px;
@@ -590,7 +589,7 @@ footer > p > a:hover{
 }
 
 #Formulario h1 {
-    font-size: 2.4rem;
+    font-size: 2.5rem;
     font-weight: 700;
     color: var(--cor-primaria);
     margin-bottom: 1rem;
@@ -608,22 +607,28 @@ footer > p > a:hover{
 .formulario-container {
     display: flex;
     flex-direction: column;
-    gap: 1.5rem;
+    gap: 2rem;
 }
 
+/* Estilos para grupos de inputs */
 .input-group {
     display: flex;
     flex-direction: column;
     align-items: flex-start;
 }
 
+/* Estilo para labels */
 .input-group label {
     font-size: 1.1rem;
     color: var(--cor-primaria);
     margin-bottom: 0.5rem;
+    font-weight: 600;
 }
 
-.input-group input {
+/* Estilo para inputs de texto, email, tel e number */
+.input-group input,
+.input-group select,
+.input-group textarea {
     width: 100%;
     padding: 0.8rem;
     font-size: 1.1rem;
@@ -633,11 +638,50 @@ footer > p > a:hover{
     transition: border-color 0.3s ease;
 }
 
-.input-group input:focus {
+/* Estilo para inputs quando em foco */
+.input-group input:focus,
+.input-group select:focus,
+.input-group textarea:focus {
     border-color: var(--cor-primaria);
 }
 
-/* Botão continuar */
+/* Estilo para o textarea */
+.input-group textarea {
+    height: 120px;
+    resize: vertical;
+}
+
+/* Dica de preenchimento no formulário */
+.form-hint {
+    font-size: 0.9rem;
+    color: #777;
+    margin-left: 0.5rem;
+    font-weight: 400;
+}
+
+/* Estilos para os botões de radio */
+.radio-group {
+    display: flex;
+    gap: 1rem;
+    align-items: center;
+}
+
+/* Estilos para o campo de telefone */
+#contato {
+    width: 100%;
+    padding: 0.8rem;
+    font-size: 1.1rem;
+    border: 1px solid #ddd;
+    border-radius: 8px;
+    outline: none;
+    transition: border-color 0.3s ease;
+}
+
+#contato:focus {
+    border-color: var(--cor-primaria);
+}
+
+/* Estilos para os botões */
 .btn-continuar {
     background-color: var(--cor-rosa);
     color: #fff;
@@ -647,19 +691,12 @@ footer > p > a:hover{
     border-radius: 50px;
     cursor: pointer;
     transition: background-color 0.3s ease;
-    margin-top: 1rem;
+    margin-top: 2rem;
 }
 
 .btn-continuar:hover {
     background-color: var(--cor-lilas-forte);
 }
-
-.form-hint {
-    font-size: var(--fonte-menor);
-    color: #777;
-    margin-left: 0.3rem;
-}
-
 /* Responsivo */
 @media (max-width: 768px) {
     #Destaque {
@@ -726,23 +763,6 @@ footer > p > a:hover{
     .faq-item .faq-toggle {
         font-size: 16px;
     }
-    #Formulario {
-        padding: 1.5rem;
-    }
-
-    #Formulario h1 {
-        font-size: 2rem;
-    }
-
-    .input-group input {
-        font-size: 1rem;
-        padding: 0.7rem;
-    }
-
-    .btn-continuar {
-        font-size: 1rem;
-        padding: 0.8rem 1.5rem;
-    }
     footer > p > a{
         font-size: 16px;
         background: none;
@@ -754,5 +774,23 @@ footer > p > a:hover{
         background: none;
         color: var(--cor-lilas-forte);
         padding: 0px;
+    }
+    #Formulario {
+        padding: 1.5rem;
+    }
+
+    #Formulario h1 {
+        font-size: 2rem;
+    }
+
+    .input-group input,
+    .input-group select,
+    .input-group textarea {
+        font-size: 1rem;
+    }
+
+    .btn-continuar {
+        width: 100%;
+        padding: 1rem;
     }
 }

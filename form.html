@@ -17,7 +17,6 @@
         <section id="Formulario">
             <h1>Preencha seus dados para continuar</h1>
             <p>Por favor, preencha as informações abaixo para que possamos entrar em contato com você e agendar sua consulta de amamentação.</p>
-            
             <form id="formulario" class="formulario-container">
                 <div class="input-group">
                     <label for="nome-completo">Nome Completo</label>
@@ -25,80 +24,141 @@
                 </div>
                 
                 <div class="input-group">
-                    <label for="contato">Número de Contato <span class="form-hint">(com DDD, ex: 00 00000-0000)</span></label>
-                    <input type="tel" id="contato" name="contato" required placeholder="00 00000-0000">
+                    <label for="contato">Número de Contato <span class="form-hint">(com DDD, ex: (00) 00000-0000)</span></label>
+                    <input type="tel" id="contato" name="contato" required placeholder="(00) 00000-0000">
                 </div>
-    
+
                 <script>
-                    function aplicarMascaraTelefone(input) {
-                        input.addEventListener('input', function(e) {
-                            let valor = e.target.value.replace(/\D/g, ''); // Remove tudo que não for número
-                            if (valor.length > 11) valor = valor.slice(0, 11); // Limita a 11 dígitos
-    
-                            let formatado = valor;
-    
-                            if (valor.length > 2 && valor.length <= 6) {
-                                formatado = `(${valor.slice(0,2)}) ${valor.slice(2)}`;
-                            } else if (valor.length > 6 && valor.length <= 10) {
-                                formatado = `(${valor.slice(0,2)}) ${valor.slice(2,6)}-${valor.slice(6)}`;
-                            } else if (valor.length === 11) {
-                                formatado = `(${valor.slice(0,2)}) ${valor.slice(2,7)}-${valor.slice(7)}`;
+                    document.addEventListener('DOMContentLoaded', function () {
+                        const contatoInput = document.getElementById('contato');
+
+                        contatoInput.addEventListener('input', function () {
+                            let telefone = contatoInput.value.replace(/\D/g, ''); // Remove qualquer caractere não numérico
+
+                            if (telefone.length <= 10) {
+                                telefone = telefone.replace(/^(\d{2})(\d{0,5})(\d{0,4})$/, '($1) $2-$3');
+                            } else {
+                                telefone = telefone.replace(/^(\d{2})(\d{5})(\d{4})$/, '($1) $2-$3');
                             }
-    
-                            e.target.value = formatado;
+
+                            contatoInput.value = telefone;
                         });
-                    }
-    
-                    const inputContato = document.getElementById('contato');
-                    aplicarMascaraTelefone(inputContato);
+                    });
                 </script>
-                
+            
                 <div class="input-group">
                     <label for="email">E-mail</label>
                     <input type="email" id="email" name="email" required placeholder="Digite seu e-mail">
                 </div>
+            
+                <!-- Novos Campos -->
+                <div class="input-group">
+                    <label for="idade">Idade</label>
+                    <input type="number" id="idade" name="idade" required placeholder="Digite sua idade">
+                </div>
+            
+                <div class="input-group">
+                    <label for="idade-bebe">Idade do bebê (dias/semanas/meses) ou semana gestacional</label>
+                    <input type="text" id="idade-bebe" name="idade-bebe" required placeholder="Ex: 15 dias ou 30 semanas">
+                </div>
+            
+                <div class="input-group">
+                    <label>É o seu primeiro bebê?</label>
+                    <div class="radio-group">
+                        <input type="radio" id="primeiro-sim" name="primeiro-bebe" value="Sim" required>
+                        <label for="primeiro-sim">Sim</label>
+                        <input type="radio" id="primeiro-nao" name="primeiro-bebe" value="Não">
+                        <label for="primeiro-nao">Não</label>
+                    </div>
+                </div>
+            
+                <div class="input-group">
+                    <label for="experiencia">Como está sua experiência com a amamentação até agora? (Ou dúvidas se gestante)</label>
+                    <textarea id="experiencia" name="experiencia" required placeholder="Conte com sinceridade..."></textarea>
+                </div>
+            
+                <div class="input-group">
+                    <label for="motivo">Qual o principal motivo da sua busca?</label>
+                    <select id="motivo" name="motivo" required>
+                        <option value="">Selecione...</option>
+                        <option value="Dificuldade com a pega">Dificuldade com a pega</option>
+                        <option value="Dor ou machucados nos seios">Dor ou machucados nos seios</option>
+                        <option value="Produção de leite (muito ou pouco)">Produção de leite (muito ou pouco)</option>
+                        <option value="Orientação para ordenha">Orientação para ordenha</option>
+                        <option value="Medo de não estar alimentando o suficiente">Medo de não estar alimentando o suficiente</option>
+                        <option value="Outro">Outro</option>
+                    </select>
+                </div>
+            
+                <div class="input-group">
+                    <label for="orientacao">Você já recebeu alguma orientação anterior sobre amamentação?</label>
+                    <textarea id="orientacao" name="orientacao" required placeholder="Conte aqui..."></textarea>
+                </div>
+            
+                <div class="input-group">
+                    <label for="condicao">Existe alguma condição de saúde importante que você gostaria de informar?</label>
+                    <textarea id="condicao" name="condicao" required placeholder="Descreva, se houver..."></textarea>
+                </div>
+            
+                <div class="input-group">
+                    <label for="abordagem">Algo específico que deseja que seja abordado na consulta?</label>
+                    <textarea id="abordagem" name="abordagem" required placeholder="Informe seu interesse principal..."></textarea>
+                </div>
                 
+                <!-- Botão -->
                 <button type="submit" class="btn-continuar">Continuar</button>
-            </form>
+            </form>            
         </section>            
     </main>
     <script>
         document.getElementById('formulario').addEventListener('submit', function(event) {
-            event.preventDefault();
+        event.preventDefault();
 
-            const nome = document.getElementById('nome-completo').value;
-            const contato = document.getElementById('contato').value;
-            const email = document.getElementById('email').value;
+        const nome = document.getElementById('nome-completo').value;
+        const contato = document.getElementById('contato').value;
+        const email = document.getElementById('email').value;
+        const idade = document.getElementById('idade').value;
+        const idadeBebe = document.getElementById('idade-bebe').value;
+        const primeiroBebe = document.querySelector('input[name="primeiro-bebe"]:checked')?.value || '';
+        const experiencia = document.getElementById('experiencia').value;
+        const motivo = document.getElementById('motivo').value;
+        const orientacao = document.getElementById('orientacao').value;
+        const condicao = document.getElementById('condicao').value;
+        const abordagem = document.getElementById('abordagem').value;
 
-            const dados = {
-                "Nome": nome,
-                "Telefone": contato,
-                "E-mail": email
-            };
+        const dados = {
+            "Nome": nome,
+            "Telefone": contato,
+            "E-mail": email,
+            "Idade": idade,
+            "Idade do bebê ou semana gestacional": idadeBebe,
+            "Primeiro bebê": primeiroBebe,
+            "Experiência com amamentação ou dúvidas": experiencia,
+            "Motivo principal da busca": motivo,
+            "Orientação anterior sobre amamentação": orientacao,
+            "Condição de saúde relevante": condicao,
+            "Ponto principal para abordar na consulta": abordagem
+        };
 
-            fetch('https://hook.us2.make.com/wobko2bjxc1wrb9mgiz7yz4du1m4iu5q', {
-                method: 'POST',
-                headers: {
-                    'Content-Type': 'application/json',
-                },
-                body: JSON.stringify(dados)
-            })
-            .then(response => {
-                if (response.ok) {
-                    console.log('Dados enviados com sucesso.');
-                    const mensagemEnvio = document.getElementById('mensagem-envio');
-                    if (mensagemEnvio) mensagemEnvio.style.display = 'block';
-                    document.getElementById('formulario').reset();
-                    // Redireciona após o envio com sucesso
-                    window.location.href = 'https://mpago.li/2SeR83c';
-                } else {
-                    console.error('Erro ao enviar os dados: ', response.statusText);
-                }
-            })
-            .catch((error) => {
-                console.error('Erro ao enviar os dados:', error);
-            });
+        fetch('https://hook.us2.make.com/wobko2bjxc1wrb9mgiz7yz4du1m4iu5q', {
+            method: 'POST',
+            headers: {
+                'Content-Type': 'application/json',
+            },
+            body: JSON.stringify(dados)
+        })
+        .then(response => {
+            if (response.ok) {
+                console.log('Dados enviados com sucesso.');
+                window.location.href = 'https://mpago.li/2SeR83c';
+            } else {
+                console.error('Erro ao enviar os dados: ', response.statusText);
+            }
+        })
+        .catch((error) => {
+            console.error('Erro ao enviar os dados:', error);
         });
+    });
     </script>        
     <footer>
         <p>&copy; 2025 Amamentação sem Dor | <a href="https://wa.me/5521988729585" target="_blank">Contato via WhatsApp</a></p>
