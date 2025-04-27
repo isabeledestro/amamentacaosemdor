@@ -1,7 +1,9 @@
 @charset "UTF-8";
 /* Estilos gerais do modal */
 #modal {
-    display: none; /* Inicialmente escondido */
+    display: flex; /* Flexbox para centralizar o conteúdo */
+    justify-content: center; /* Centraliza horizontalmente */
+    align-items: center; /* Centraliza verticalmente */
     position: fixed;
     top: 0;
     left: 0;
@@ -9,8 +11,6 @@
     height: 100%;
     background-color: rgba(0, 0, 0, 0.5); /* Cor de fundo semitransparente */
     z-index: 9999; /* Para garantir que o modal fique acima de outros conteúdos */
-    justify-content: center;
-    align-items: center;
     padding: 1rem;
 }
 
@@ -23,6 +23,7 @@
     border-radius: 10px;
     box-shadow: 0 10px 30px rgba(0, 0, 0, 0.2);
     text-align: center;
+    position: relative; /* Mantém o modal dentro da tela */
 }
 
 /* Estilo do título no modal */
